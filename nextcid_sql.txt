@@ -1,0 +1,49 @@
+
+
+CREATE DATABASE IF NOT EXISTS Nextcid;
+
+USE Nextcid;
+
+CREATE TABLE IF NOT EXISTS Curso(
+	idCurso INT NOT NULL, 
+	nmCurso VARCHAR (50) NOT NULL,
+	PRIMARY KEY(idCurso)
+);
+
+CREATE TABLE IF NOT EXISTS Disciplina(
+	iddisciplina INT  NOT NULL, 
+	nmDisciplina VARCHAR (50) NOT NULL, 
+	idCurso INT,
+	PRIMARY KEY(idDisciplina),
+	CONSTRAINT FK_DISCIPLINACURSO FOREIGN KEY Disciplina (idCurso) REFERENCES Curso (idCurso) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Questao(
+	idQuestao INT NOT NULL, 
+	anoQuestao VARCHAR (4) NOT NULL, 
+	nQuestao VARCHAR (200) NOT NULL, 
+	tpquestao VARCHAR (15) NOT NULL, 
+    enunciado LONGTEXT NOT NULL, 
+    img LONGTEXT,
+    altA TEXT, 
+    altB TEXT,
+    altC TEXT,
+    altD TEXT,
+    altE TEXT,
+    respAlt VARCHAR(2),
+    respDiss MEDIUMTEXT,
+    iddisciplina1 INT  NOT NULL, 
+    iddisciplina2 INT,
+    iddisciplina3 INT,
+    iddisciplina4 INT,
+    
+  	PRIMARY KEY (idQuestao),
+	CONSTRAINT FK_QUESTAODISCIPLINA1 FOREIGN KEY Questao (iddisciplina1) REFERENCES Disciplina (iddisciplina) ON DELETE CASCADE,
+    CONSTRAINT FK_QUESTAODISCIPLINA2 FOREIGN KEY Questao (iddisciplina2) REFERENCES Disciplina (iddisciplina) ON DELETE CASCADE,
+	CONSTRAINT FK_QUESTAODISCIPLINA3 FOREIGN KEY Questao (iddisciplina3) REFERENCES Disciplina (iddisciplina) ON DELETE CASCADE,
+    CONSTRAINT FK_QUESTAODISCIPLINA4 FOREIGN KEY Questao (iddisciplina4) REFERENCES Disciplina (iddisciplina) ON DELETE CASCADE
+);
+
+
+
+
